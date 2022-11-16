@@ -47,3 +47,8 @@ aws:
   secretsmanager:
     name: gamego
     enabled: true
+
+cloud:
+  aws:
+    stack:
+      auto: false
