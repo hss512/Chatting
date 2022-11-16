@@ -1,0 +1,49 @@
+spring:
+  http:
+    multipart:
+      enable: true
+  profiles:
+    include: jwt
+  #  datasource:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ${jdbc-url}
+    username: ${username}
+    password: ${password}
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        open-in-view: false
+
+
+    hibernate:
+#      ddl-auto: update
+      temp:
+        use_jdbc_metadata_defaults: false
+    generate-ddl: true
+
+#
+#  servlet:
+#    multipart:
+#      max-file-size: 10MB
+#      max-request-size: 10MB
+#
+#
+#cloud:
+#  aws:
+#    #    credentials:
+#    #      accessKey:
+#    #      secret-key:
+#    stack:
+#      auto: false
+#    s3:
+#      bucket: seongho-bucket/board
+#    region:
+#      static: ap-northeast-2
+
+aws:
+  secretsmanager:
+    name: gamego
+    enabled: true

@@ -1,0 +1,12 @@
+aws:
+  secretsmanager:
+    name: gamego
+
+#cloud:
+#  aws:
+#    stack:
+#      auto: false
+#    s3:
+#      bucket: seongho-bucket
+#    region:
+#      static: ap-northeast-2
