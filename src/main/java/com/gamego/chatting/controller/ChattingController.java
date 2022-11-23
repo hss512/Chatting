@@ -66,7 +66,7 @@ public class ChattingController {
 
         log.info("===========================================");
 
-        log.info("Enter_message = " , message.getPayload().getMessage());
+        log.info("Enter_message = " + message.getPayload().getMessage());
 
         log.info("ChatController.chatRoomEnter 호출");
 
