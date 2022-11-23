@@ -67,6 +67,8 @@ dependencies {
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
+    implementation 'org.springframework.security:spring-security-messaging:5.7.5'
+
 }
 
 def querydslDir = "$buildDir/generated/querydsl"

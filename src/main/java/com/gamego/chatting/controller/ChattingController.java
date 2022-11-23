@@ -1,7 +1,13 @@
-/*
 package com.gamego.chatting.controller;
 
-import com.gamego.chatting.dto.ReqChatMessageDTO;
+import com.gamego.chatting.model.dto.MemberDTO;
+import com.gamego.chatting.model.dto.chat.MessageDTO;
+import com.gamego.chatting.model.dto.chat.ReqChatMessageDTO;
+import com.gamego.chatting.model.dto.chat.ResChatMessageDTO;
+import com.gamego.chatting.model.entity.Member;
+import com.gamego.chatting.repository.MemberRepository;
+import com.gamego.chatting.service.ChatService;
+import com.gamego.chatting.service.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -17,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChattingController {
 
     private final SimpMessagingTemplate template;
+    private final JwtService jwtService;
+    private final MemberRepository memberRepository;
+    private final ChatService chatService;
 
     @MessageMapping("/notice/chat/room/{roomId}")  // /app/notice/chat/room/{roomId}
     public void chatNotice(@DestinationVariable String roomId){
@@ -56,7 +65,7 @@ public class ChattingController {
 
         log.info("===========================================");
 
-        log.info("Enter_message = " , dto.getContent());
+        log.info("Enter_message = " , dto.getMessage());
 
         log.info("ChatController.chatRoomEnter 호출");
 
@@ -83,4 +92,3 @@ public class ChattingController {
         template.convertAndSend("/topic/chat/room/" + roomId, new MessageDTO<>(2, memberDTO));
     }
 }
-*/
