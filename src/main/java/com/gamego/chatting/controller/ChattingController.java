@@ -15,6 +15,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.Message;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,7 +34,7 @@ public class ChattingController {
     }
 
     @MessageMapping("/chatting/room/{roomId}")
-    public void chatting(@DestinationVariable String roomId, ReqChatMessageDTO dto, @Header("Authorization") String token, SimpMessageHeaderAccessor accessor){
+    public void chatting(@DestinationVariable String roomId, Message<ReqChatMessageDTO> message, @Header("Authorization") String token, SimpMessageHeaderAccessor accessor){
 
         log.info("===========================================");
 
@@ -55,17 +56,17 @@ public class ChattingController {
 
         Member member = memberRepository.findByUsername(username).get();
 
-        ResChatMessageDTO chatMessage = chatService.createChat(Long.parseLong(roomId), member.getId(), dto);
+        ResChatMessageDTO chatMessage = chatService.createChat(Long.parseLong(roomId), member.getId(), message.getPayload());
 
         template.convertAndSend("/topic/chat/room/" + roomId, new MessageDTO<>(1, chatMessage));
     }
 
     @MessageMapping("/chat/room/{roomId}/enter")
-    public void chatRoomEnter(@DestinationVariable String roomId, ReqChatMessageDTO dto/*, @Header("Authorization") String token*/){
+    public void chatRoomEnter(@DestinationVariable String roomId, Message<ReqChatMessageDTO> message/*, @Header("Authorization") String token*/){
 
         log.info("===========================================");
 
-        log.info("Enter_message = " , dto.getMessage());
+        log.info("Enter_message = " , message.getPayload().getMessage());
 
         log.info("ChatController.chatRoomEnter 호출");
 
