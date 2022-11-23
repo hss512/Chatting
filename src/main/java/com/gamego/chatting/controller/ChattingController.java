@@ -61,7 +61,7 @@ public class ChattingController {
     }
 
     @MessageMapping("/chat/room/{roomId}/enter")
-    public void chatRoomEnter(@DestinationVariable String roomId, ReqChatMessageDTO dto, @Header("Authorization") String token, SimpMessageHeaderAccessor accessor){
+    public void chatRoomEnter(@DestinationVariable String roomId, ReqChatMessageDTO dto/*, @Header("Authorization") String token*/){
 
         log.info("===========================================");
 
@@ -69,21 +69,21 @@ public class ChattingController {
 
         log.info("ChatController.chatRoomEnter 호출");
 
-        String jwt = token.substring(7, token.length());
+        /*String jwt = token.substring(7, token.length());
 
-        log.info("jwt = " + jwt);
+        log.info("jwt = " + jwt);*/
 
         log.info("roomId = " + roomId);
 
         log.info("===========================================");
 
-        String username = jwtService.extractUsername(jwt).get();
+        /*String username = jwtService.extractUsername(jwt).get();
 
-        log.info("username = " + username);
+        log.info("username = " + username);*/
 
 //         String username = SESSIONS.get(accessor.getSessionId());
 
-        Member member = memberRepository.findByUsername(username).get();
+        Member member = memberRepository.findByUsername("psb4644@gmail.com").get();
 
         log.info("member.id = " + member.getId());
 
