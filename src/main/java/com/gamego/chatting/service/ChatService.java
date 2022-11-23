@@ -54,7 +54,4 @@ public class ChatService {
 
         return member.toDTO();
     }
-
-    private class JoinMemberRepository {
-    }
 }
