@@ -13,7 +13,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +33,7 @@ public class ChattingController {
     }
 
     @MessageMapping("/chatting/room/{roomId}")
-    public void chatting(@DestinationVariable String roomId, Message<ReqChatMessageDTO> message, @Header("Authorization") String token, SimpMessageHeaderAccessor accessor){
+    public void chatting(@DestinationVariable String roomId, Message<ReqChatMessageDTO> message, @Header("Authorization") String token){
 
         log.info("===========================================");
 
@@ -50,10 +49,6 @@ public class ChattingController {
 
         log.info("username = " + username);
 
-//         log.info("chatting.sessionID = " + accessor.getSessionId());
-
-//         String username = SESSIONS.get(accessor.getSessionId());
-
         Member member = memberRepository.findByUsername(username).get();
 
         ResChatMessageDTO chatMessage = chatService.createChat(Long.parseLong(roomId), member.getId(), message.getPayload());
@@ -62,7 +57,7 @@ public class ChattingController {
     }
 
     @MessageMapping("/chat/room/{roomId}/enter")
-    public void chatRoomEnter(@DestinationVariable String roomId, Message<ReqChatMessageDTO> message/*, @Header("Authorization") String token*/){
+    public void chatRoomEnter(@DestinationVariable String roomId, Message<ReqChatMessageDTO> message, @Header("Authorization") String token){
 
         log.info("===========================================");
 
@@ -70,19 +65,17 @@ public class ChattingController {
 
         log.info("ChatController.chatRoomEnter 호출");
 
-        /*String jwt = token.substring(7, token.length());
+        String jwt = token.substring(7, token.length());
 
-        log.info("jwt = " + jwt);*/
+        log.info("jwt = " + jwt);
 
         log.info("roomId = " + roomId);
 
         log.info("===========================================");
 
-        /*String username = jwtService.extractUsername(jwt).get();
+        String username = jwtService.extractUsername(jwt).get();
 
-        log.info("username = " + username);*/
-
-//         String username = SESSIONS.get(accessor.getSessionId());
+        log.info("username = " + username);
 
         Member member = memberRepository.findByUsername("psb4644@gmail.com").get();
 
