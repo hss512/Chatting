@@ -40,3 +40,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().permitAll();
     }
+}
