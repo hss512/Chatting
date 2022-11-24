@@ -68,6 +68,13 @@ dependencies {
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
     implementation 'org.springframework.security:spring-security-messaging:5.7.5'
+    
+    
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    testImplementation 'org.springframework.security:spring-security-test'
+    
 
 }
 
