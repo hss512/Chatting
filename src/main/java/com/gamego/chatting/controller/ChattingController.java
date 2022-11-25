@@ -54,6 +54,7 @@ public class ChattingController {
         ResChatMessageDTO chatMessage = chatService.createChat(Long.parseLong(roomId), member.getId(), message.getPayload());
 
         template.convertAndSend("/topic/chat/room/" + roomId, new MessageDTO<>(1, chatMessage));
+        template.convertAndSend("/topic/alarm/room/" + roomId, new MessageDTO<>(1, chatMessage));
     }
 
     @MessageMapping("/chat/room/{roomId}/enter")
