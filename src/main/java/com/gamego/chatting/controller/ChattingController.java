@@ -57,7 +57,7 @@ public class ChattingController {
     }
 
     @MessageMapping("/chat/room/{roomId}/enter")
-    public void chatRoomEnter(@DestinationVariable String roomId, Message<ReqChatMessageDTO> message, @Header("Authorization") String token){
+    public void chatRoomEnter(@DestinationVariable String roomId, Message<ReqChatMessageDTO> message/*, @Header("Authorization") String token*/){
 
         log.info("===========================================");
 
@@ -65,24 +65,26 @@ public class ChattingController {
 
         log.info("ChatController.chatRoomEnter 호출");
 
-        String jwt = token.substring(7, token.length());
+//         String jwt = token.substring(7, token.length());
 
-        log.info("jwt = " + jwt);
+//         log.info("jwt = " + jwt);
 
-        log.info("roomId = " + roomId);
+//         log.info("roomId = " + roomId);
 
-        log.info("===========================================");
+//         log.info("===========================================");
 
-        String username = jwtService.extractUsername(jwt).get();
+//         String username = jwtService.extractUsername(jwt).get();
 
-        log.info("username = " + username);
+//         log.info("username = " + username);
 
-        Member member = memberRepository.findByUsername("psb4644@gmail.com").get();
+//         Member member = memberRepository.findByUsername("psb4644@gmail.com").get();
 
-        log.info("member.id = " + member.getId());
+//         log.info("member.id = " + member.getId());
 
-        MemberDTO memberDTO = chatService.chatRoomEnter(member.getId());
+//         MemberDTO memberDTO = chatService.chatRoomEnter(member.getId());
 
-        template.convertAndSend("/topic/chat/room/" + roomId, new MessageDTO<>(2, memberDTO));
+//         template.convertAndSend("/topic/chat/room/" + roomId, new MessageDTO<>(2, memberDTO));
+        
+        template.convertAndSend("/topic/chat/room/" + roomId, "return");
     }
 }
