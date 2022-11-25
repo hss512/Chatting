@@ -18,7 +18,7 @@ public class SocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws/alarm", "/ws/chat").setAllowedOriginPatterns("*");
+        registry.addEndpoint("/ws/alarm", "/ws/chat").setAllowedOriginPatterns("*").withSockJS();
     }
 
     @Override
